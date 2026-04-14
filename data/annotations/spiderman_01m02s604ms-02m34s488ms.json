@@ -1,0 +1,185 @@
+{
+  "film": "spiderman_01m02s604ms-02m34s488ms",
+  "scenes": [
+    {
+      "scene_id": 0,
+      "start_frame": 0,
+      "end_frame": 33,
+      "valence": 0.2858,
+      "arousal": 0.5538,
+      "mood_label": "passionate",
+      "notes": "auto-generated"
+    },
+    {
+      "scene_id": 1,
+      "start_frame": 34,
+      "end_frame": 53,
+      "valence": 0.2,
+      "arousal": -0.5529,
+      "mood_label": "peaceful",
+      "notes": "auto-generated"
+    },
+    {
+      "scene_id": 2,
+      "start_frame": 54,
+      "end_frame": 136,
+      "valence": 0.1655,
+      "arousal": 0.4736,
+      "mood_label": "mysterious",
+      "notes": "auto-generated"
+    },
+    {
+      "scene_id": 3,
+      "start_frame": 137,
+      "end_frame": 172,
+      "valence": -0.338,
+      "arousal": 0.4403,
+      "mood_label": "mysterious",
+      "notes": "auto-generated"
+    },
+    {
+      "scene_id": 4,
+      "start_frame": 173,
+      "end_frame": 255,
+      "valence": 0.1284,
+      "arousal": 0.5045,
+      "mood_label": "mysterious",
+      "notes": "auto-generated"
+    },
+    {
+      "scene_id": 5,
+      "start_frame": 256,
+      "end_frame": 395,
+      "valence": -0.0925,
+      "arousal": 0.4137,
+      "mood_label": "mysterious",
+      "notes": "auto-generated"
+    },
+    {
+      "scene_id": 6,
+      "start_frame": 396,
+      "end_frame": 516,
+      "valence": 0.1885,
+      "arousal": -0.0561,
+      "mood_label": "humorous",
+      "notes": "auto-generated"
+    },
+    {
+      "scene_id": 7,
+      "start_frame": 517,
+      "end_frame": 589,
+      "valence": -0.1293,
+      "arousal": 0.382,
+      "mood_label": "mysterious",
+      "notes": "auto-generated"
+    },
+    {
+      "scene_id": 8,
+      "start_frame": 590,
+      "end_frame": 611,
+      "valence": -0.1423,
+      "arousal": -0.446,
+      "mood_label": "sad",
+      "notes": "auto-generated"
+    },
+    {
+      "scene_id": 9,
+      "start_frame": 612,
+      "end_frame": 630,
+      "valence": -0.0801,
+      "arousal": -0.3844,
+      "mood_label": "sad",
+      "notes": "auto-generated"
+    },
+    {
+      "scene_id": 10,
+      "start_frame": 631,
+      "end_frame": 653,
+      "valence": 0.3753,
+      "arousal": -0.5019,
+      "mood_label": "peaceful",
+      "notes": "auto-generated"
+    },
+    {
+      "scene_id": 11,
+      "start_frame": 654,
+      "end_frame": 746,
+      "valence": -0.1254,
+      "arousal": 0.4703,
+      "mood_label": "mysterious",
+      "notes": "auto-generated"
+    },
+    {
+      "scene_id": 12,
+      "start_frame": 747,
+      "end_frame": 780,
+      "valence": 0.4704,
+      "arousal": 0.2463,
+      "mood_label": "humorous",
+      "notes": "auto-generated"
+    },
+    {
+      "scene_id": 13,
+      "start_frame": 781,
+      "end_frame": 843,
+      "valence": -0.2101,
+      "arousal": -0.048,
+      "mood_label": "mysterious",
+      "notes": "auto-generated"
+    },
+    {
+      "scene_id": 14,
+      "start_frame": 844,
+      "end_frame": 915,
+      "valence": -0.1947,
+      "arousal": 0.4209,
+      "mood_label": "mysterious",
+      "notes": "auto-generated"
+    },
+    {
+      "scene_id": 15,
+      "start_frame": 916,
+      "end_frame": 998,
+      "valence": 0.1597,
+      "arousal": 0.4088,
+      "mood_label": "mysterious",
+      "notes": "auto-generated"
+    },
+    {
+      "scene_id": 16,
+      "start_frame": 999,
+      "end_frame": 1017,
+      "valence": -0.2755,
+      "arousal": -0.4961,
+      "mood_label": "sad",
+      "notes": "auto-generated"
+    },
+    {
+      "scene_id": 17,
+      "start_frame": 1018,
+      "end_frame": 1937,
+      "valence": 0.132,
+      "arousal": 0.1117,
+      "mood_label": "mysterious",
+      "notes": "auto-generated"
+    },
+    {
+      "scene_id": 18,
+      "start_frame": 1938,
+      "end_frame": 2100,
+      "valence": 0.2123,
+      "arousal": 0.2135,
+      "mood_label": "mysterious",
+      "notes": "auto-generated"
+    },
+    {
+      "scene_id": 19,
+      "start_frame": 2101,
+      "end_frame": 2201,
+      "valence": 0.5587,
+      "arousal": 0.4916,
+      "mood_label": "passionate",
+      "notes": "auto-generated"
+    }
+  ]
+}

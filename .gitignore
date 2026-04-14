@@ -1,0 +1,21 @@
+# Video files
+data/videos/*.mkv
+
+# Pipeline outputs
+data/outputs/*
+!data/outputs/.gitkeep
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environment
+.env
