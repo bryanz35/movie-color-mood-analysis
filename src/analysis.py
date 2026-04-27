@@ -181,7 +181,7 @@ def embed_scenes(emd_matrix: np.ndarray, method: str = "umap") -> np.ndarray:
     elif method == "tsne":
         from sklearn.manifold import TSNE
         embedding = TSNE(
-            n_components=2, metric="precomputed", random_state=42, perplexity=min(30, len(emd_matrix) - 1)
+            n_components=2, metric="precomputed", init="random", random_state=42, perplexity=min(30, len(emd_matrix) - 1)
         ).fit_transform(emd_matrix)
     else:
         raise ValueError(f"Unknown method: {method}")
