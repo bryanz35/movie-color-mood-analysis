@@ -1,5 +1,4 @@
-# Quantitative Color-Mood Analysis of Films via Per-Scene CIELAB Palette
-Extraction
+# Quantitative Color-Mood Analysis of Films via Per-Scene CIELAB Palette Extraction
 
 Bryan Zhong
 
@@ -183,14 +182,21 @@ Table 2: Kruskal-Wallis results for per-scene color features across the 8 mood
 categories. Bins marked with † are not significant at α = 0.05.
 
 | Feature      |        H | p-value     |
-|--------------|---------:|-------------| | mean_L       |    122.9 | 1.9e-23
-| | mean_chroma  |    202.3 | 3.7e-40     | | hue_0        |     63.3 | 3.3e-11
-| | hue_1        |    372.9 | 1.5e-76     | | hue_2        |     58.3 | 3.2e-10
-| | hue_3        |      6.4 | 0.50 †      | | hue_4        |     17.7 | 1.4e-2 †
-| | hue_5        |     31.4 | 5.2e-5      | | hue_6        |     68.0 | 3.7e-12
-| | hue_7        |     77.7 | 4.0e-14     | | hue_8        |    224.1 | 9.1e-45
-| | hue_9        |    196.5 | 6.3e-39     | | hue_10       |     59.0 | 2.4e-10
-| | hue_11       |     66.5 | 7.6e-12     |
+|--------------|---------:|-------------|
+| mean_L       |    122.9 | 1.9e-23     |
+| mean_chroma  |    202.3 | 3.7e-40     |
+| hue_0        |     63.3 | 3.3e-11     |
+| hue_1        |    372.9 | 1.5e-76     |
+| hue_2        |     58.3 | 3.2e-10     |
+| hue_3        |      6.4 | 0.50 †      |
+| hue_4        |     17.7 | 1.4e-2 †    |
+| hue_5        |     31.4 | 5.2e-5      |
+| hue_6        |     68.0 | 3.7e-12     |
+| hue_7        |     77.7 | 4.0e-14     |
+| hue_8        |    224.1 | 9.1e-45     |
+| hue_9        |    196.5 | 6.3e-39     |
+| hue_10       |     59.0 | 2.4e-10     |
+| hue_11       |     66.5 | 7.6e-12     |
 
 The pattern is consistent with the qualitative reading of the film. Luminance
 and chroma both move with mood, in the expected directions: *peaceful* and
@@ -212,9 +218,12 @@ on live-action films.
 Table 3: Random forest classifier performance on the *Spider-Man: into the
 Spider-Verse* corpus.
 
-| Metric              | Value         | |---------------------|---------------|
-| Cross-val accuracy  | 60.1% ± 2.8%  | | Chance baseline     | 12.5%         |
-| Classes             | 8             | | Folds               | 5             |
+| Metric              | Value         |
+|---------------------|---------------|
+| Cross-val accuracy  | 60.1% ± 2.8%  |
+| Chance baseline     | 12.5%         |
+| Classes             | 8             |
+| Folds               | 5             |
 
 The gap to the Wei et al. benchmark has at least three plausible explanations.
 First, the corpus is highly imbalanced: the *mysterious* class alone accounts
