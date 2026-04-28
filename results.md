@@ -28,32 +28,26 @@ accuracy against a 12.5% chance baseline, falling below the ~80% live-action
 benchmark from Wei et al. but well above chance. The t-SNE embedding shows
 visible clustering of mood categories in palette space, particularly for
 *mysterious* and *peaceful* scenes. This work demonstrates that scene-level
-CIELAB palette features carry a measurable mood signal in a single,
-color-intentional film, while also surfacing the practical limits of
-single-film, single-annotator corpora.
+color palette features carry a measurable mood signal.
 
 The relationship between film color and audience emotion has long been treated
 as established craft knowledge by directors, cinematographers, and colorists,
-but it has only recently become tractable as a quantitative research target.
+but it has only recently become viable as a quantitative research target.
 Modern shot boundary detectors (Souček & Lokoč, 2020) and per-scene palette
 extractors (Kim & Choi, 2020) make it feasible to reduce a feature-length film
-into a sequence of compact color descriptors at scene granularity. Earlier work
+into a sequence of compact color descriptors for each scene. Earlier work
 by Wei et al. (2004) established the eight-category mood taxonomy used here and
 reported approximately 80% classification accuracy on live-action films using a
 Movie Palette Histogram representation and an SVM classifier. More recent
-digital-humanities work from the ERC FilmColors project (Flueckiger & Halter,
+work from the ERC FilmColors project (Flueckiger & Halter,
 2020) argues for CIELAB over RGB or HSV on the grounds that Euclidean distance
 in CIELAB approximates perceptual color difference (ΔE), which is the relevant
 quantity when relating color to a perceptual outcome such as mood.
 
-This study takes those choices as fixed and asks a narrower question: given a
-single film with deliberate color design, how much of the per-scene mood label
-is recoverable from the per-scene CIELAB palette alone? The contribution of this
-paper is threefold: an end-to-end open-source pipeline from raw video to
-per-scene color features, a hand-annotated mood corpus over 1,015 scenes from a
-single feature film, and an evaluation of three complementary statistical views
-(per-feature significance tests, supervised classification, and unsupervised
-palette embedding) of the color-mood relationship in that corpus.
+This study builds on top of these works and aims to research how well
+mood labels can be identified from solely color palette. This works constructs
+an end-to-end pipeline from raw video to color analysis and mood identification,
+using [placeholder].
 
 ## 1 Methodology
 
