@@ -106,8 +106,27 @@ def main() -> None:
     clf_path = output_dir / "classifier_results.json"
     with open(clf_path, "w") as f:
         json.dump(clf_results, f, indent=2)
-    print(f"  Classifier accuracy: {clf_results['mean_accuracy']:.2%} "
-          f"(chance: {clf_results['chance_baseline']:.2%})")
+    print(
+        f"  Classifier accuracy: {clf_results['mean_accuracy']:.2%} "
+        f"± {clf_results.get('std_accuracy', 0.0):.2%} "
+        f"(chance: {clf_results['chance_baseline']:.2%}, "
+        f"majority: {clf_results.get('majority_baseline', 0.0):.2%})"
+    )
+    if "macro_f1" in clf_results:
+        print(
+            f"  Macro-F1: {clf_results['macro_f1']:.3f}  "
+            f"Weighted-F1: {clf_results['weighted_f1']:.3f}  "
+            f"Dummy-stratified macro-F1: {clf_results['dummy_stratified']['macro_f1']:.3f}"
+        )
+        print("  Per-class F1:")
+        for cls, m in clf_results["per_class"].items():
+            print(
+                f"    {cls:12s} P={m['precision']:.2f}  R={m['recall']:.2f}  "
+                f"F1={m['f1']:.2f}  n={m['support']}"
+            )
+        print("  Top features:")
+        for entry in clf_results["feature_importances"][:5]:
+            print(f"    {entry['feature']:18s} {entry['importance']:.3f}")
 
     print(f"\n=== Done. Results in {output_dir} ===")
 

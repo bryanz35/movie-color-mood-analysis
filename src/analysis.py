@@ -6,8 +6,14 @@ import numpy as np
 import ot
 import pandas as pd
 from scipy import stats
+from sklearn.dummy import DummyClassifier
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import cross_val_score
+from sklearn.metrics import (
+    classification_report,
+    confusion_matrix,
+    f1_score,
+)
+from sklearn.model_selection import StratifiedKFold, cross_val_predict, cross_val_score
 from tqdm import tqdm
 
 
@@ -124,42 +130,118 @@ def train_mood_classifier(
 ) -> dict:
     """Train a random forest classifier for mood from color features.
 
+    Reports cross-validated accuracy, macro/weighted F1, per-class
+    precision/recall/F1, confusion matrix, feature importances, and two
+    dummy-classifier baselines (uniform chance + majority class).
+
     Args:
         features: Feature DataFrame from build_feature_matrix.
         mood_labels: List of mood label strings.
         random_state: Random seed.
 
     Returns:
-        Dict with mean_accuracy, std_accuracy, chance_baseline, n_classes.
+        Dict with cross-validated metrics, per-class report, confusion
+        matrix, feature importances, and baselines.
     """
     feature_cols = [c for c in features.columns if c != "scene_id"]
     X = features[feature_cols].values
     y = np.array(mood_labels)
 
-    n_classes = len(set(y))
-    chance = 1.0 / n_classes
+    classes = sorted(set(y))
+    n_classes = len(classes)
+    uniform_chance = 1.0 / n_classes
+    class_counts = {c: int((y == c).sum()) for c in classes}
+    majority_baseline = max(class_counts.values()) / len(y)
 
     clf = RandomForestClassifier(
         n_estimators=100, random_state=random_state, class_weight="balanced"
     )
 
-    n_splits = min(5, min(np.bincount(pd.factorize(y)[0])))
+    min_class = min(class_counts.values())
+    n_splits = min(5, min_class)
     if n_splits < 2:
         return {
             "mean_accuracy": 0.0,
             "std_accuracy": 0.0,
-            "chance_baseline": chance,
+            "chance_baseline": uniform_chance,
+            "majority_baseline": majority_baseline,
             "n_classes": n_classes,
+            "class_counts": class_counts,
             "note": "Not enough samples per class for cross-validation",
         }
 
-    scores = cross_val_score(clf, X, y, cv=n_splits, scoring="accuracy")
+    cv = StratifiedKFold(n_splits=n_splits, shuffle=True, random_state=random_state)
+
+    # Accuracy across folds (mean ± std).
+    acc_scores = cross_val_score(clf, X, y, cv=cv, scoring="accuracy")
+    f1_macro_scores = cross_val_score(clf, X, y, cv=cv, scoring="f1_macro")
+    f1_weighted_scores = cross_val_score(clf, X, y, cv=cv, scoring="f1_weighted")
+
+    # Out-of-fold predictions for confusion matrix + per-class report.
+    y_pred = cross_val_predict(clf, X, y, cv=cv)
+
+    report = classification_report(
+        y, y_pred, labels=classes, output_dict=True, zero_division=0
+    )
+    # Trim to per-class entries + averages, cast floats.
+    per_class = {
+        c: {
+            "precision": float(report[c]["precision"]),
+            "recall": float(report[c]["recall"]),
+            "f1": float(report[c]["f1-score"]),
+            "support": int(report[c]["support"]),
+        }
+        for c in classes
+    }
+
+    cm = confusion_matrix(y, y_pred, labels=classes)
+
+    # Dummy baselines for honest comparison under imbalance.
+    dummy_majority = DummyClassifier(strategy="most_frequent")
+    dummy_stratified = DummyClassifier(strategy="stratified", random_state=random_state)
+    dummy_majority_acc = cross_val_score(dummy_majority, X, y, cv=cv, scoring="accuracy").mean()
+    dummy_majority_f1m = cross_val_score(dummy_majority, X, y, cv=cv, scoring="f1_macro").mean()
+    dummy_stratified_acc = cross_val_score(dummy_stratified, X, y, cv=cv, scoring="accuracy").mean()
+    dummy_stratified_f1m = cross_val_score(dummy_stratified, X, y, cv=cv, scoring="f1_macro").mean()
+
+    # Feature importances from a single fit on all data (informational).
+    clf_full = RandomForestClassifier(
+        n_estimators=100, random_state=random_state, class_weight="balanced"
+    ).fit(X, y)
+    importances = sorted(
+        zip(feature_cols, clf_full.feature_importances_.tolist()),
+        key=lambda kv: kv[1],
+        reverse=True,
+    )
 
     return {
-        "mean_accuracy": float(scores.mean()),
-        "std_accuracy": float(scores.std()),
-        "chance_baseline": chance,
+        "mean_accuracy": float(acc_scores.mean()),
+        "std_accuracy": float(acc_scores.std()),
+        "macro_f1": float(f1_macro_scores.mean()),
+        "macro_f1_std": float(f1_macro_scores.std()),
+        "weighted_f1": float(f1_weighted_scores.mean()),
+        "weighted_f1_std": float(f1_weighted_scores.std()),
+        "chance_baseline": uniform_chance,
+        "majority_baseline": majority_baseline,
+        "dummy_majority": {
+            "accuracy": float(dummy_majority_acc),
+            "macro_f1": float(dummy_majority_f1m),
+        },
+        "dummy_stratified": {
+            "accuracy": float(dummy_stratified_acc),
+            "macro_f1": float(dummy_stratified_f1m),
+        },
         "n_classes": n_classes,
+        "n_splits": int(n_splits),
+        "class_counts": class_counts,
+        "per_class": per_class,
+        "confusion_matrix": {
+            "labels": classes,
+            "matrix": cm.tolist(),
+        },
+        "feature_importances": [
+            {"feature": f, "importance": float(v)} for f, v in importances
+        ],
     }
 
 
