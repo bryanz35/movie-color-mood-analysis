@@ -1,3 +1,24 @@
+# Introduction
+Hello and welcome to the project! This was created as part of my final for Film
+Studies.
+
+Due to time constraints, this is more of a proof-of-concept of a viable research
+project. Much of the code was written with the help of AI, although the
+background research, debugging, testing, and verification still took a huge
+amount of time.
+
+A markdown file discussing results can be found at `results.md`. To run the
+project, create a virtualenv and install the requirements with `pip install -r
+requirements.py`. Put the movie in `data/videos` and run the nice pipeline
+wrapper at `scripts/run_pipeline.py`. **This can take several hours depending on
+computer GPU and movie length.**
+
+A jupyter notebook with various output visualizations can be found at
+`notebooks/exploration.ipynb`
+
+Huge thanks to Mr. Woodmansee for teaching Film Studies, and shoutout to
+RCompSci, where I learned a lot of ML/statistics stuff I used in this project.
+
 # Research Notes
 ---
 
